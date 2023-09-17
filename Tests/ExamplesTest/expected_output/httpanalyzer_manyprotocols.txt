@@ -45,8 +45,8 @@ HTTP request methods
 ---------------------
 | Method    | Count |
 ---------------------
-| GET       | 150   |
 | POST      | 3     |
+| GET       | 150   |
 ---------------------
 
 Hostnames count
