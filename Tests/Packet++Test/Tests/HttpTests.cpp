@@ -536,36 +536,5 @@ PTF_TEST_CASE(HttpReassemblyTest)
   pcpp::HttpResponseLayer* responseLayer3 = frag3.getLayerOfType<pcpp::HttpResponseLayer>();
   PTF_ASSERT_NOT_NULL(responseLayer3);
 
-/* 	PTF_ASSERT_NOT_NULL(ipLayer);
-	PTF_ASSERT_TRUE(ipLayer->isFragment());
-	PTF_ASSERT_TRUE(ipLayer->isFirstFragment());
-	PTF_ASSERT_FALSE(ipLayer->isLastFragment());
-	PTF_ASSERT_EQUAL(ipLayer->getFragmentOffset(), 0);
-	PTF_ASSERT_NOT_EQUAL((ipLayer->getFragmentFlags() & PCPP_IP_MORE_FRAGMENTS), 0);
-	PTF_ASSERT_NOT_NULL(ipLayer->getNextLayer());
-	PTF_ASSERT_EQUAL(ipLayer->getNextLayer()->getProtocol(), pcpp::GenericPayload, enum);
-
-
-	ipLayer = frag2.getLayerOfType<pcpp::IPv4Layer>();
-	PTF_ASSERT_NOT_NULL(ipLayer);
-	PTF_ASSERT_TRUE(ipLayer->isFragment());
-	PTF_ASSERT_FALSE(ipLayer->isFirstFragment());
-	PTF_ASSERT_FALSE(ipLayer->isLastFragment());
-	PTF_ASSERT_EQUAL(ipLayer->getFragmentOffset(), 1480);
-	PTF_ASSERT_NOT_EQUAL((ipLayer->getFragmentFlags() & PCPP_IP_MORE_FRAGMENTS), 0);
-	PTF_ASSERT_NOT_NULL(ipLayer->getNextLayer());
-	PTF_ASSERT_EQUAL(ipLayer->getNextLayer()->getProtocol(), pcpp::GenericPayload, enum);
-
-	ipLayer = frag3.getLayerOfType<pcpp::IPv4Layer>();
-	PTF_ASSERT_NOT_NULL(ipLayer);
-	PTF_ASSERT_TRUE(ipLayer->isFragment());
-	PTF_ASSERT_FALSE(ipLayer->isFirstFragment());
-	PTF_ASSERT_TRUE(ipLayer->isLastFragment());
-	PTF_ASSERT_EQUAL(ipLayer->getFragmentOffset(), 2960);
-	PTF_ASSERT_EQUAL(ipLayer->getFragmentFlags(), 0);
-	PTF_ASSERT_NOT_NULL(ipLayer->getNextLayer())
-	PTF_ASSERT_EQUAL(ipLayer->getNextLayer()->getProtocol(), pcpp::GenericPayload, enum); */
-
-
   PTF_ASSERT_TRUE(true);
 } // HttpReassemblyTest
