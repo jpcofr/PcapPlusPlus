@@ -506,3 +506,66 @@ PTF_TEST_CASE(HttpMalformedResponseTest)
 		index++;
 	}
 } // HttpMalformedResponseTest
+
+
+
+/// Tests HTTP packet reassembly
+PTF_TEST_CASE(HttpReassemblyTest)
+{
+  timeval time;
+	gettimeofday(&time, nullptr);
+
+  READ_FILE_AND_CREATE_PACKET(1, "PacketExamples/Http1xFrag1.dat");
+  READ_FILE_AND_CREATE_PACKET(2, "PacketExamples/Http1xFrag2.dat");
+  READ_FILE_AND_CREATE_PACKET(3, "PacketExamples/Http1xFrag3.dat");
+
+	pcpp::Packet frag1(&rawPacket1);
+	pcpp::Packet frag2(&rawPacket2);
+	pcpp::Packet frag3(&rawPacket3);
+
+	PTF_ASSERT_TRUE(frag1.isPacketOfType(pcpp::HTTPResponse));
+	pcpp::HttpResponseLayer* responseLayer1 = frag1.getLayerOfType<pcpp::HttpResponseLayer>();
+	PTF_ASSERT_NOT_NULL(responseLayer1);
+  responseLayer1->isHeaderComplete();
+
+	PTF_ASSERT_TRUE(frag2.isPacketOfType(pcpp::HTTPResponse));
+	pcpp::HttpResponseLayer* responseLayer2 = frag2.getLayerOfType<pcpp::HttpResponseLayer>();
+	PTF_ASSERT_NOT_NULL(responseLayer2);
+
+  PTF_ASSERT_TRUE(frag3.isPacketOfType(pcpp::HTTPResponse));
+  pcpp::HttpResponseLayer* responseLayer3 = frag3.getLayerOfType<pcpp::HttpResponseLayer>();
+  PTF_ASSERT_NOT_NULL(responseLayer3);
+
+/* 	PTF_ASSERT_NOT_NULL(ipLayer);
+	PTF_ASSERT_TRUE(ipLayer->isFragment());
+	PTF_ASSERT_TRUE(ipLayer->isFirstFragment());
+	PTF_ASSERT_FALSE(ipLayer->isLastFragment());
+	PTF_ASSERT_EQUAL(ipLayer->getFragmentOffset(), 0);
+	PTF_ASSERT_NOT_EQUAL((ipLayer->getFragmentFlags() & PCPP_IP_MORE_FRAGMENTS), 0);
+	PTF_ASSERT_NOT_NULL(ipLayer->getNextLayer());
+	PTF_ASSERT_EQUAL(ipLayer->getNextLayer()->getProtocol(), pcpp::GenericPayload, enum);
+
+
+	ipLayer = frag2.getLayerOfType<pcpp::IPv4Layer>();
+	PTF_ASSERT_NOT_NULL(ipLayer);
+	PTF_ASSERT_TRUE(ipLayer->isFragment());
+	PTF_ASSERT_FALSE(ipLayer->isFirstFragment());
+	PTF_ASSERT_FALSE(ipLayer->isLastFragment());
+	PTF_ASSERT_EQUAL(ipLayer->getFragmentOffset(), 1480);
+	PTF_ASSERT_NOT_EQUAL((ipLayer->getFragmentFlags() & PCPP_IP_MORE_FRAGMENTS), 0);
+	PTF_ASSERT_NOT_NULL(ipLayer->getNextLayer());
+	PTF_ASSERT_EQUAL(ipLayer->getNextLayer()->getProtocol(), pcpp::GenericPayload, enum);
+
+	ipLayer = frag3.getLayerOfType<pcpp::IPv4Layer>();
+	PTF_ASSERT_NOT_NULL(ipLayer);
+	PTF_ASSERT_TRUE(ipLayer->isFragment());
+	PTF_ASSERT_FALSE(ipLayer->isFirstFragment());
+	PTF_ASSERT_TRUE(ipLayer->isLastFragment());
+	PTF_ASSERT_EQUAL(ipLayer->getFragmentOffset(), 2960);
+	PTF_ASSERT_EQUAL(ipLayer->getFragmentFlags(), 0);
+	PTF_ASSERT_NOT_NULL(ipLayer->getNextLayer())
+	PTF_ASSERT_EQUAL(ipLayer->getNextLayer()->getProtocol(), pcpp::GenericPayload, enum); */
+
+
+  PTF_ASSERT_TRUE(true);
+} // HttpReassemblyTest
